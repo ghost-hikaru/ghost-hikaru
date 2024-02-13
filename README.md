@@ -7,7 +7,7 @@
 
 - 📫 How to reach me **Melvin.mathurin35@gmail.com**
 
-- 📄 Know about my experiences [https://melvinmathurin.fr/PDF/Melvin_MATHURIN.pdf](https://melvinmathurin.fr/PDF/Melvin_MATHURIN.pdf)
+- 📄 Know about my experiences [CV](https://melvinmathurin.fr/PDF/Melvin_MATHURIN.pdf)
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
