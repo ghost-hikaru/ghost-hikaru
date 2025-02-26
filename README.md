@@ -24,7 +24,7 @@
 
 
 # Java Spring Boot
-1. Peux-tu expliquer l’architecture de Spring Boot et ses avantages ?
+1. Peux-tu expliquer l’architecture de Spring Boot et ses avantages ?<br>
 → Spring Boot suit une architecture basée sur l’inversion de contrôle (IoC) et l’injection de dépendances. Il fournit une configuration automatique (@SpringBootApplication), embarque un serveur web (Tomcat, Jetty, Undertow) et suit le principe “convention over configuration”. Ses avantages incluent la simplicité, la rapidité de développement et l’intégration facile avec d’autres frameworks Spring.
 
 2. Quelle est la différence entre @Component, @Service et @Repository ?
