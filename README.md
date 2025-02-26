@@ -27,37 +27,37 @@
 1. Peux-tu expliquer l’architecture de Spring Boot et ses avantages ?<br>
 → Spring Boot suit une architecture basée sur l’inversion de contrôle (IoC) et l’injection de dépendances. Il fournit une configuration automatique (@SpringBootApplication), embarque un serveur web (Tomcat, Jetty, Undertow) et suit le principe “convention over configuration”. Ses avantages incluent la simplicité, la rapidité de développement et l’intégration facile avec d’autres frameworks Spring.
 
-2. Quelle est la différence entre @Component, @Service et @Repository ?
+2. Quelle est la différence entre @Component, @Service et @Repository ?<br>
 → @Component est une annotation générique pour déclarer un bean Spring.
 → @Service est une spécialisation de @Component indiquant qu’un bean contient de la logique métier.
 → @Repository est une spécialisation de @Component pour les classes d’accès aux données (DAO) et permet une meilleure gestion des exceptions liées aux bases de données.
 
-3. Comment fonctionne l’injection de dépendances dans Spring Boot ?
+3. Comment fonctionne l’injection de dépendances dans Spring Boot ?<br>
 → Spring Boot injecte automatiquement les dépendances à l’aide d’annotations comme @Autowired, @Inject ou via un constructeur. L’injection peut se faire par champ, setter ou constructeur (recommandé).
 
-4. Que sont les Spring Profiles et comment les utilises-tu ?
+4. Que sont les Spring Profiles et comment les utilises-tu ?<br>
 → Les Spring Profiles permettent d’avoir des configurations spécifiques selon l’environnement (dev, test, prod). On les active avec spring.profiles.active=dev dans application.properties ou via l’annotation @Profile("dev") sur des beans spécifiques.
 
-5. Qu’est-ce que Spring Security et comment sécuriser une API avec JWT ?
+5. Qu’est-ce que Spring Security et comment sécuriser une API avec JWT ?<br>
 → Spring Security est un framework pour gérer l’authentification et l’autorisation. Pour sécuriser une API avec JWT :
 Créer un filtre pour intercepter les requêtes et valider les tokens.
 Configurer SecurityFilterChain pour autoriser ou bloquer l’accès.
 Générer un token JWT avec une clé secrète et l’envoyer après connexion.
 Vérifier le token dans les requêtes suivantes et extraire l’utilisateur.
 
-7. Peux-tu expliquer le fonctionnement de Spring Data JPA et ses principales annotations (@Entity, @Repository, @Transactional) ?
+7. Peux-tu expliquer le fonctionnement de Spring Data JPA et ses principales annotations (@Entity, @Repository, @Transactional) ?<br>
 → Spring Data JPA simplifie l’accès aux bases de données en utilisant Hibernate.
 
 @Entity : Définit une classe comme une entité JPA.
 @Repository : Indique qu’une classe est un composant d’accès aux données.
 @Transactional : Gère les transactions en assurant leur atomicité (rollback automatique en cas d’échec).
 
-8. Quelle est la différence entre CrudRepository, JpaRepository et PagingAndSortingRepository ?
+8. Quelle est la différence entre CrudRepository, JpaRepository et PagingAndSortingRepository ?<br>
 → CrudRepository : Fournit des méthodes CRUD basiques (save, findById, delete).
 → JpaRepository : Hérite de CrudRepository et ajoute des méthodes JPA avancées (findAll(Pageable)).
 → PagingAndSortingRepository : Ajoute des méthodes pour la pagination et le tri (findAll(Sort)).
 
-9. Comment gérer la pagination et le tri dans une API Spring Boot ?
+9. Comment gérer la pagination et le tri dans une API Spring Boot ?<br>
 → Utiliser Pageable et Page<T> avec JpaRepository.
 Exemple :
 
@@ -69,9 +69,9 @@ public Page<User> getUsers(Pageable pageable) {
     return userRepository.findAll(pageable);
 }
 
-10. Comment configurer un cache dans une application Spring Boot ?
-→ Ajouter @EnableCaching dans la classe principale. Utiliser @Cacheable, @CachePut et @CacheEvict. Exemple :
-
+10. Comment configurer un cache dans une application Spring Boot ?<br>
+→ Ajouter @EnableCaching dans la classe principale. Utiliser @Cacheable, @CachePut et @CacheEvict.<br>
+Exemple :
 java
 Copier
 Modifier
@@ -80,22 +80,22 @@ public User getUserById(Long id) {
     return userRepository.findById(id).orElse(null);
 }
 
-11. Que se passe-t-il si deux transactions essaient de modifier la même ligne en base de données en même temps ?
+11. Que se passe-t-il si deux transactions essaient de modifier la même ligne en base de données en même temps ?<br>
 → Cela peut entraîner des conflits. Pour éviter cela, on peut utiliser :
 
 L’isolation des transactions (@Transactional(isolation = Isolation.SERIALIZABLE)).
 L’optimistic locking (@Version avec JPA).
 Le pessimistic locking (@Lock(LockModeType.PESSIMISTIC_WRITE)).
 
-12. Comment configurer et utiliser des WebSockets dans Spring Boot ?
+12. Comment configurer et utiliser des WebSockets dans Spring Boot ?<br>
 → Ajouter la dépendance Spring WebSocket et configurer un @Configuration avec @EnableWebSocket. Ensuite, créer un contrôleur avec @MessageMapping et utiliser SimpMessagingTemplate pour envoyer des messages.
 
-13. Peux-tu expliquer la différence entre une exception checked et unchecked en Java, et comment les gérer dans Spring Boot ?
+13. Peux-tu expliquer la différence entre une exception checked et unchecked en Java, et comment les gérer dans Spring Boot ?<br>
 → Checked Exception : Doit être capturée ou déclarée avec throws (IOException).
 → Unchecked Exception : Hérite de RuntimeException et ne nécessite pas throws (NullPointerException).
 → En Spring Boot, on gère les exceptions globalement avec @ControllerAdvice et @ExceptionHandler.
 
-14. Comment tester un contrôleur Spring Boot avec JUnit et Mockito ?
+14. Comment tester un contrôleur Spring Boot avec JUnit et Mockito ?<br>
 → Utiliser @WebMvcTest pour tester un contrôleur seul et MockMvc pour simuler des requêtes.
 Exemple :
 
@@ -118,7 +118,7 @@ class UserControllerTest {
     }
 }
 
-15. Comment configurer un fichier application.properties ou application.yml pour différents environnements ?
+15. Comment configurer un fichier application.properties ou application.yml pour différents environnements ?<br>
 → Utiliser application-{profile}.yml (ex: application-dev.yml, application-prod.yml).
 → Activer un profil avec spring.profiles.active=dev ou -Dspring.profiles.active=dev.
 
