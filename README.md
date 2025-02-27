@@ -431,6 +431,7 @@ Cookies HTTP-only (plus sécurisé).
 
 # Vue.js
 63. Quelle est la différence entre Vue 2 et Vue 3 ?
+
 | **Différence**          | **Vue 2**                          | **Vue 3**                      |
 |------------------------|--------------------------------|-------------------------------|
 | **Performance**       | Moins optimisé                  | Meilleures performances grâce à un nouveau Virtual DOM |
@@ -448,6 +449,7 @@ reactive() crée un état réactif profond.
 ref() encapsule une valeur réactive.
 
 66. Comment fonctionne le Composition API par rapport à l’Options API ?
+
 | **Critère** | **Options API** (Vue 2 et 3) | **Composition API** (Vue 3) |
 |------------|-----------------------------|---------------------------|
 | **Organisation** | Tout est divisé en `data`, `methods`, `computed` | Tout est centralisé avec `setup()` |
