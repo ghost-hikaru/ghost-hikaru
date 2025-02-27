@@ -214,18 +214,36 @@ Permet de charger les modules à la demande pour améliorer les performances
 
 # GitLab
 27. Comment fonctionne un pipeline CI/CD sous GitLab ?
+→ Un pipeline GitLab CI/CD est défini dans un fichier .gitlab-ci.yml à la racine du projet. Il est composé de stages (étapes) et de jobs (tâches) exécutés dans un ordre défini.
 
-28. Comment déclencher un pipeline uniquement sur certaines branches ou tags ?
+29. Comment déclencher un pipeline uniquement sur certaines branches ou tags ?
+→ Utiliser les directives only et except dans .gitlab-ci.yml.
 
-29. Comment gérer les variables d’environnement dans un pipeline GitLab ?
+31. Comment gérer les variables d’environnement dans un pipeline GitLab ?
+→ Définir les variables d’environnement dans GitLab (dans Settings > CI/CD > Variables) ou directement dans .gitlab-ci.yml.
 
-30. Que se passe-t-il si une étape d’un job échoue dans un pipeline GitLab ?
+33. Que se passe-t-il si une étape d’un job échoue dans un pipeline GitLab ?
+→ Par défaut, le pipeline s’arrête si un job échoue.
+→ On peut gérer cela avec allow_failure: true pour ne pas bloquer les autres étapes
 
-31. Comment mettre en place un runner GitLab sur une machine locale ?
+35. Comment mettre en place un runner GitLab sur une machine locale ?
+→ Installer et enregistrer un GitLab Runner en 5 étapes :
+Télécharger le runner
+Enregistrer le runner avec un token GitLab
+Suivre les instructions et entrer l’URL GitLab et le token.
+Choisir un executor (docker, shell, etc.).
+Démarrer le runner
 
-32. Comment utiliser des artefacts dans GitLab CI/CD ?
+37. Comment utiliser des artefacts dans GitLab CI/CD ?
+→ Les artefacts permettent de sauvegarder des fichiers entre les jobs.
 
-33. Comment déboguer un pipeline GitLab CI/CD ?
+39. Comment déboguer un pipeline GitLab CI/CD ?
+→ Plusieurs méthodes :
+
+Activer le mode debug en ajoutant CI_DEBUG_TRACE=true dans les variables GitLab.
+Relancer un job en mode interactif (si le runner est shell ou docker)
+Afficher les logs détaillés en ajoutant set -x dans les scripts .gitlab-ci.yml.
+Utiliser l’option retry dans l’interface GitLab pour rejouer un job.
 
 # Maven
 34. À quoi sert Maven dans un projet Java ?
