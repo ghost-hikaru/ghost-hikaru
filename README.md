@@ -247,84 +247,239 @@ Utiliser l’option retry dans l’interface GitLab pour rejouer un job.
 
 # Maven
 34. À quoi sert Maven dans un projet Java ?
+→ Maven est un outil de gestion de projet qui automatise la compilation, la gestion des dépendances et le packaging des applications Java. Il suit une structure standard (convention over configuration) et utilise un fichier pom.xml pour définir les dépendances et plugins.
 
 35. Que sont les dependencies et plugins dans un pom.xml ?
+Dependencies : Bibliothèques externes utilisées dans le projet (ex: Spring Boot, Hibernate).
+Plugins : Outils exécutés lors du build (ex: compiler, test, package).
 
-36. Qu’est-ce qu’un scope de dépendance en Maven (compile, provided, runtime, test, system) ?
+37. Qu’est-ce qu’un scope de dépendance en Maven (compile, provided, runtime, test, system) ?
+Les scopes définissent quand une dépendance est disponible :
 
-37. Comment créer un profil Maven pour différents environnements ?
+compile : Par défaut, accessible partout.
+provided : Nécessaire pour compiler mais fournie par l’environnement (ex: API Servlet en Tomcat).
+runtime : Nécessaire à l’exécution mais pas à la compilation.
+test : Utilisé uniquement pour les tests.
+system : Similaire à provided, mais nécessite un chemin absolu local.
 
-38. Comment nettoyer et recompiler un projet avec Maven ?
+38. Comment créer un profil Maven pour différents environnements ?
+→ Utiliser <profiles> dans pom.xml et activer avec -P :
 
-39. Quelle est la différence entre mvn clean, mvn install et mvn package ?
+40. Comment nettoyer et recompiler un projet avec Maven ?
+clean : Supprime le dossier target (compilation précédente).
+install : Compile et installe le .jar ou .war dans le repo local.
 
-40. Comment ajouter un dépôt privé de dépendances dans Maven (settings.xml) ?
+42. Quelle est la différence entre mvn clean, mvn install et mvn package ?
+mvn clean : Supprime les fichiers générés (target/).
+mvn package : Compile et génère un .jar ou .war.
+mvn install : Compile, package et installe l’artefact dans le repository local (~/.m2/repository).
 
-41. Comment configurer Maven pour générer un exécutable .jar ?
+45. Comment configurer Maven pour générer un exécutable .jar ?
+→ Ajouter maven-jar-plugin et maven-shade-plugin pour inclure les dépendances :
 
-42. Comment gérer les conflits de version de dépendances en Maven ?
+47. Comment gérer les conflits de version de dépendances en Maven ?
+→ Utiliser dependencyManagement pour forcer une version unique
+→ Utiliser mvn dependency:tree pour analyser les conflits de versions.
 
 # Front-End Général
 43. Quelle est la différence entre HTML, CSS et JavaScript ?
+→ HTML (HyperText Markup Language) : Structure le contenu d’une page web (titres, paragraphes, images, etc.).
+→ CSS (Cascading Style Sheets) : Définit l’apparence et le style de la page (couleurs, marges, animations, etc.).
+→ JavaScript : Rend la page interactive (animations, gestion des événements, appels API, etc.).
 
-44. Comment fonctionne le DOM et le Virtual DOM ?
+45. Comment fonctionne le DOM et le Virtual DOM ?
+→ DOM (Document Object Model) : Représentation en arbre d’un document HTML/CSS. Permet de manipuler dynamiquement les éléments via JavaScript.
+→ Virtual DOM (React, Vue) : Copie optimisée du DOM réel. Il compare l’ancienne et la nouvelle version pour ne mettre à jour que les éléments modifiés (diffing & reconciliation).
 
-45. Peux-tu expliquer la différence entre CSS Grid et Flexbox ?
+46. Peux-tu expliquer la différence entre CSS Grid et Flexbox ?
+→ Flexbox : Disposition en une seule dimension (ligne ou colonne). Idéal pour des alignements dynamiques et des layouts flexibles.
+→ CSS Grid : Gestion en deux dimensions (lignes + colonnes). Parfait pour des grilles complexes avec un contrôle précis des placements.
 
-46. Qu’est-ce que le concept de responsive design et comment l’implémenter ?
+48. Qu’est-ce que le concept de responsive design et comment l’implémenter ?
+→ Le responsive design permet d’adapter une page web à différents écrans (mobile, tablette, desktop).
+Media Queries en CSS
+Unités flexibles (%, em, rem, vh, vw).
+Flexbox & Grid pour des mises en page fluides
 
-47. Comment fonctionne le modèle d’événements en JavaScript ?
+50. Comment fonctionne le modèle d’événements en JavaScript ?
+→ JavaScript utilise un modèle basé sur des événements où des actions (clic, clavier, scroll) déclenchent des fonctions appelées event listeners.
 
-48. Qu’est-ce qu’un Web Component et quand l’utiliser ?
+Propagation des événements :
 
-49. Quelle est la différence entre une SPA (Single Page Application) et une MPA (Multi Page Application) ?
+Capturing Phase (de l’élément parent vers l’enfant).
+Target Phase (l’événement atteint l’élément ciblé).
+Bubbling Phase (remonte vers les parents).
 
-50. Comment fonctionne le lazy loading des ressources en front-end ?
+51. Qu’est-ce qu’un Web Component et quand l’utiliser ?
+→ Un Web Component est un composant web réutilisable et encapsulé, basé sur :
 
-51. Qu’est-ce que le bundling et le tree shaking dans une application JavaScript ?
+Custom Elements (customElements.define)
+Shadow DOM (style et logique isolés)
+HTML Templates (<template> pour réutiliser du HTML)
+Utilisation : Quand on veut créer des composants indépendants et réutilisables sans framework.
+
+52. Quelle est la différence entre une SPA (Single Page Application) et une MPA (Multi Page Application) ?
+→ SPA (Single Page Application) :
+
+Une seule page HTML chargée initialement.
+Navigation fluide grâce au routing côté client.
+Exemples : React, Angular, Vue.js.
+→ MPA (Multi Page Application) :
+
+Chaque clic charge une nouvelle page depuis le serveur.
+Plus simple et mieux adapté au SEO.
+Exemples : Sites e-commerce, blogs classiques.
+
+53. Comment fonctionne le lazy loading des ressources en front-end ?
+→ Le lazy loading consiste à charger les ressources uniquement quand elles sont nécessaires, réduisant ainsi le temps de chargement initial de la page.
+
+55. Qu’est-ce que le bundling et le tree shaking dans une application JavaScript ?
+→ Bundling :
+
+Combine plusieurs fichiers JavaScript en un seul (bundle.js).
+Réduit le nombre de requêtes HTTP.
+Fait avec Webpack, Rollup, Parcel.
+→ Tree Shaking :
+
+Élimine le code inutilisé (dead code) au moment du build.
+Utilisé avec des modules ES6 (import/export) et Webpack/Rollup.
 
 # React
 52. Quelle est la différence entre une classe et un composant fonctionnel en React ?
+→ Composant classe :
+
+Utilise extends React.Component.
+Utilise this.state et this.setState pour gérer l’état.
+Nécessite le binding (this.handleClick = this.handleClick.bind(this)).
+Exécution plus lourde.
+
+→ Composant fonctionnel (préféré depuis React 16.8 avec Hooks) :
+
+Plus léger et lisible.
+Utilise useState et useEffect pour gérer l’état et les effets.
+Pas besoin de this.
 
 53. Comment fonctionne le Virtual DOM en React ?
+→ Le Virtual DOM est une copie en mémoire du DOM réel.
+
+Processus :
+
+Quand l’état change, React crée un nouveau Virtual DOM.
+Il compare l’ancien et le nouveau avec l’algorithme de diffing.
+Il applique uniquement les changements nécessaires dans le DOM réel (reconciliation).
+Avantages :
+✅ Meilleures performances.
+✅ Moins de manipulations directes du DOM.
 
 54. Peux-tu expliquer le concept des Hooks en React ? (useState, useEffect, etc.)
+→ Les Hooks permettent d’utiliser l’état et le cycle de vie sans composants classe.
+
+useState : Gère l’état local.
+useEffect : Gère les effets de bord (fetch API, timers, etc.).
+useRef : Référence un élément du DOM sans déclencher un rendu.
+useContext : Accède aux valeurs d’un contexte sans Consumer.
+useReducer : Alternative avancée à useState pour la gestion d’état complexe.
 
 55. Quelle est la différence entre useEffect et useLayoutEffect ?
+→ useEffect :
+
+Exécuté après le rendu.
+Idéal pour les requêtes API, timers, logs.
+→ useLayoutEffect :
+
+Exécuté avant le rendu final.
+Utile pour mesurer le DOM ou appliquer des animations.
 
 56. Comment gérer l’état global dans une application React (Redux, Context API, Zustand, etc.) ?
+→ Options populaires :
+
+Context API : Simple, idéal pour de petites applications.
+Redux : Gère un état global avec reducers et actions (complexe mais puissant).
+Zustand : Plus léger et plus simple que Redux
 
 57. Comment optimiser les performances d’une application React (React.memo, useCallback, useMemo) ?
+React.memo(Component) : Évite les rendus inutiles.
+useCallback(fn, [deps]) : Mémorise une fonction.
+useMemo(value, [deps]) : Mémorise un calcul coûteux.
+Lazy loading (React.lazy()).
+Virtualisation (react-window pour afficher une grande liste).
 
-58. Comment gérer la navigation dans une application React (React Router) ?
+59. Comment gérer la navigation dans une application React (React Router) ?
+→ React Router permet la navigation sans recharger la page.
 
-59. Peux-tu expliquer le Server-Side Rendering (SSR) et le Client-Side Rendering (CSR) ?
+61. Peux-tu expliquer le Server-Side Rendering (SSR) et le Client-Side Rendering (CSR) ?
+→ CSR (Client-Side Rendering) :
 
-60. Comment utiliser un API externe avec fetch ou axios dans React ?
+Tout le rendu se fait côté client.
+Initialement rapide mais long au premier chargement.
+→ SSR (Server-Side Rendering) :
 
-61. Comment gères-tu l’authentification et la persistance du token JWT dans React ?
+Le serveur génère le HTML avant l’envoi.
+Meilleur pour le SEO et les performances initiales.
+Framework SSR : Next.js.
 
-62. Quelles sont les différences entre React et Angular ?
+63. Comment gères-tu l’authentification et la persistance du token JWT dans React ?
+→ Stockage du token :
+
+LocalStorage (persistant mais peu sécurisé).
+SessionStorage (valable uniquement pendant la session).
+Cookies HTTP-only (plus sécurisé).
+
+64. Quelles sont les différences entre React et Angular ?
+🔹 React est plus léger et flexible.
+🔹 Angular est plus structuré et complet.
 
 # Vue.js
 63. Quelle est la différence entre Vue 2 et Vue 3 ?
+| **Différence**          | **Vue 2**                          | **Vue 3**                      |
+|------------------------|--------------------------------|-------------------------------|
+| **Performance**       | Moins optimisé                  | Meilleures performances grâce à un nouveau Virtual DOM |
+| **Système de réactivité** | Basé sur `Object.defineProperty()` | Basé sur `Proxy`, plus rapide et puissant |
+| **Composition API**    | Non natif, nécessite Vue Composition API | Introduit nativement `Composition API` |
+| **Fragments**         | Non supporté | Supporté, permet plusieurs éléments racines |
+| **Teleport**         | Non disponible | Permet d'afficher un élément ailleurs dans le DOM |
+| **Suspense**         | Non disponible | Facilite le rendu asynchrone |
+| **Vuex vs Pinia**     | Vuex | Pinia recommandé pour la gestion d’état |
+
 
 64. Peux-tu expliquer le fonctionnement du système de réactivité de Vue ?
+Utilise Proxy, ce qui permet de suivre les changements proactivement.
+reactive() crée un état réactif profond.
+ref() encapsule une valeur réactive.
 
-65. Comment fonctionne le Composition API par rapport à l’Options API ?
+66. Comment fonctionne le Composition API par rapport à l’Options API ?
+| **Critère** | **Options API** (Vue 2 et 3) | **Composition API** (Vue 3) |
+|------------|-----------------------------|---------------------------|
+| **Organisation** | Tout est divisé en `data`, `methods`, `computed` | Tout est centralisé avec `setup()` |
+| **Lisibilité** | Moins clair pour les gros composants | Plus facile à structurer |
+| **Réutilisation** | Mixins peuvent causer des conflits | `Composable functions` permettent un meilleur partage de logique |
 
-66. Que sont les directives Vue.js (v-if, v-for, v-bind, v-model, etc.) ?
 
-67. Comment gérer le state global dans Vue (Vuex vs Pinia) ?
+67. Que sont les directives Vue.js (v-if, v-for, v-bind, v-model, etc.) ?
+v-bind	Liaison dynamique d’attribut (:href="url")
+v-model	Liaison bidirectionnelle sur un <input>
+v-on	Gestionnaire d’événements (@click="function")
+v-show	Affichage conditionnel (modifie display)
 
-68. Comment optimiser les performances d’une application Vue ?
+69. Comment gérer le state global dans Vue (Vuex vs Pinia) ?
+Simplicité	Boilerplate important	Plus simple et fluide
+Performance	Plus lourd	Plus rapide
+Reactif	Basé sur mutations	Basé sur reactive() et computed()
+Support officiel	Vuex 4 est toujours maintenu	Pinia est recommandé pour Vue 3
 
-69. Comment fonctionne Vue Router et comment gérer les routes dynamiques ?
+71. Comment optimiser les performances d’une application Vue ?
+✅ Lazy loading des composants et des routes.
+✅ Utilisation de keep-alive pour éviter de recréer les composants.
+✅ v-once pour un rendu unique des éléments statiques.
+✅ computed() au lieu de recalculer dans le template.
+✅ Vue 3 Suspense pour un chargement asynchrone efficace.
 
-70. Peux-tu expliquer le concept des slots et des components children ?
+74. Peux-tu expliquer le concept des slots et des components children ?
+Les slots permettent de transmettre du contenu à un composant enfant.
 
-71. Comment fonctionne le lazy loading des composants dans Vue.js ?
+76. Comment fonctionne le lazy loading des composants dans Vue.js ?
+Le lazy loading charge un composant uniquement quand il est nécessaire.
 
-72. Comment tester un composant Vue avec Jest ou Vue Testing Library ?
-
-73. Quelles sont les différences entre Vue et React ?
+78. Quelles sont les différences entre Vue et React ?
+✅ Vue : Plus simple et rapide à apprendre, idéal pour petits/moyens projets.
+✅ React : Plus puissant pour les grandes applications avec besoin de contrôle avancé.
