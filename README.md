@@ -124,28 +124,93 @@ class UserControllerTest {
 
 # Angular
 15. Peux-tu expliquer le cycle de vie d’un composant Angular ?
+→ Le cycle de vie d’un composant Angular est composé de plusieurs étapes gérées par des hooks :
+
+ngOnInit : Exécuté après l’initialisation du composant.
+ngOnChanges : Déclenché lorsque les inputs changent.
+ngDoCheck : S’exécute à chaque cycle de détection des changements.
+ngAfterContentInit : Exécuté après l’insertion du contenu <ng-content>.
+ngAfterContentChecked : Appelé après chaque vérification du contenu projeté.
+ngAfterViewInit : Exécuté après l’initialisation de la vue enfant.
+ngAfterViewChecked : Déclenché après chaque vérification de la vue enfant.
+ngOnDestroy : Exécuté avant la destruction du composant (utile pour nettoyer les abonnements).
 
 16. Quelle est la différence entre les directives structurelles et les directives d’attribut ?
+→ Directives structurelles : Modifient le DOM en ajoutant ou supprimant des éléments (*ngIf, *ngFor, *ngSwitch).
+→ Directives d’attribut : Modifient l’apparence ou le comportement d’un élément ([ngClass], [ngStyle], appHighlight).
 
-17. Comment fonctionne le data binding dans Angular ?
+18. Comment fonctionne le data binding dans Angular ?
+→ Angular propose 4 types de data binding :
 
-18. Comment implémenter l’interception des requêtes HTTP avec HttpInterceptor ?
+Interpolation ({{}}) : Affichage de valeurs dans le HTML.
+Property Binding ([property]="value") : Lien entre une propriété du template et une variable du composant.
+Event Binding ((event)="function()") : Capture des événements utilisateur (click, keyup, etc.).
+Two-way Binding ([(ngModel)]="value") : Synchronisation bidirectionnelle entre un champ du formulaire et une variable du composant.
 
-19. Comment Angular détecte-t-il les changements (ChangeDetectionStrategy.OnPush vs ChangeDetectionStrategy.Default) ?
+19. Comment implémenter l’interception des requêtes HTTP avec HttpInterceptor ?
+→ Un HttpInterceptor permet d’intercepter les requêtes et réponses HTTP globalement.
 
-20. Quelle est la différence entre BehaviorSubject, Subject et Observable dans RxJS ?
+Créer un service qui implémente HttpInterceptor :
+```
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const clonedReq = req.clone({
+      setHeaders: { Authorization: `Bearer token` }
+    });
+    return next.handle(clonedReq);
+  }
+}
+```
+Ajouter l’intercepteur dans app.module.ts :
+```typescript
+providers: [
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+];
+```
 
-21. Comment gérer les erreurs dans les requêtes HTTP Angular ?
+20. Comment Angular détecte-t-il les changements (ChangeDetectionStrategy.OnPush vs ChangeDetectionStrategy.Default) ?
+→ Angular utilise la détection de changements (Change Detection) pour mettre à jour l’UI :
 
-22. Comment optimiser les performances d’une application Angular ?
+ChangeDetectionStrategy.Default : Vérifie tous les composants enfants à chaque changement.
+ChangeDetectionStrategy.OnPush : Vérifie uniquement si une nouvelle référence est assignée (@Input() change ou un Observable émet une nouvelle valeur), optimisant ainsi les performances.
 
-23. Comment Angular gère-t-il les formulaires (Template-driven forms vs Reactive forms) ?
+21. Quelle est la différence entre BehaviorSubject, Subject et Observable dans RxJS ?
+Observable : Source de données qui émet des valeurs, mais ne garde pas en mémoire la dernière valeur.
+Subject : Permet d’émettre des valeurs et d’écouter ces valeurs (multicast).
+BehaviorSubject : Comme Subject, mais stocke la dernière valeur émise et la renvoie aux nouveaux abonnés immédiatement.
 
-24. Comment fonctionne le lazy loading des modules dans Angular ?
+23. Comment gérer les erreurs dans les requêtes HTTP Angular ?
+→ Utiliser catchError de RxJS dans le HttpClient.
+```typescript
+this.http.get('api/users').pipe(
+  catchError(error => {
+    console.error('Erreur détectée', error);
+    return throwError(() => new Error('Erreur réseau'));
+  })
+).subscribe();
+```
+24. Comment optimiser les performances d’une application Angular ?
+Utiliser ChangeDetectionStrategy.OnPush.
+Charger les modules en lazy loading.
+Eviter les abonnements inutiles et utiliser async pipe pour les Observable.
+Optimiser les requêtes HTTP (mise en cache, HttpInterceptor).
+Activer AOT (Ahead-of-Time Compilation) pour réduire la taille du bundle.
 
-25. Comment utiliser des Guards (CanActivate, CanDeactivate) dans Angular ?
+26. Comment Angular gère-t-il les formulaires (Template-driven forms vs Reactive forms) ?
+→ Angular propose deux types de formulaires :
 
-26. Comment créer un service Angular et l’injecter dans plusieurs composants ?
+Template-driven forms : Basés sur le DOM et gérés via FormsModule (ngModel). Simple mais limité.
+Reactive forms : Gérés via FormGroup et FormControl, plus flexibles et adaptés aux validations complexes.
+
+27. Comment fonctionne le lazy loading des modules dans Angular ?
+Permet de charger les modules à la demande pour améliorer les performances
+
+29. Comment utiliser des Guards (CanActivate, CanDeactivate) dans Angular ?
+→ Les guards permettent de contrôler l’accès aux routes.
+
+31. Comment créer un service Angular et l’injecter dans plusieurs composants ?
+→ Un service est une classe injectable permettant de partager des données et de la logique métier entre composants
 
 # GitLab
 27. Comment fonctionne un pipeline CI/CD sous GitLab ?
